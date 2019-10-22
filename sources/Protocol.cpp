@@ -6,7 +6,7 @@ std::string Protocol::getNextCommand()
     std::string command;
 
     std::getline(std::cin, command, '\r');
-    return (command);
+	return (command);
 }
 
 Command Protocol::whichCommand(const std::string &command)
