@@ -1,16 +1,17 @@
-#include "Protocol.hpp"
-#include "Brain.hpp"
+#include "Launcher.hpp"
+#include <iostream>
 
 int main(int ac, const char* av[])
 {
-	Protocol protocol;
-	Brain brian;
+	Launcher laucher;
+	int rep = 0;
 
-	while (true) {
-		const std::string& command = protocol.getNextCommand();
-		Command commandType = protocol.whichCommand(command);
-
-
+	while (rep == 0) {
+		rep = laucher.launch();
+		if (rep == 84) {
+			std::cerr << "Error: error occured" << std::endl;
+			return (84);
+		}
 	}
 	return (0);
 }

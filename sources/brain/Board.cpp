@@ -1,17 +1,35 @@
 #include "Board.hpp"
 
-void Board::start(int size)
+int Board::start(int size)
 {
+	if (size != BOARD_SIZE) {
+		return (84);
+	}
+
+	init();
+	return (0);
 }
 
-const std::vector<PIECE>& Board::add(int x, int y, PIECE piece)
+const array<array<PIECE, BOARD_SIZE>, BOARD_SIZE>& Board::add(int x, int y, PIECE piece)
 {
 	board[x][y] = piece;
 
 	return (board);
 }
 
-const std::vector<PIECE>& Board::get()
+const array<array<PIECE, BOARD_SIZE>, BOARD_SIZE>& Board::get()
 {
 	return (board);
+}
+
+const PIECE Board::at(int x, int y)
+{
+	return board[x][y];
+}
+
+void Board::init()
+{
+	for (auto& column : board) {
+		column.fill(NONE);
+	}
 }

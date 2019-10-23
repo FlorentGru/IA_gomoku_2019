@@ -8,7 +8,10 @@ Brain::Brain()
 
 const std::string& Brain::start(int size)
 {
-	board.start(size);
+	if (goban.start(size) == 84) {
+		answer = "ERROR unsupported size";
+		return (answer);
+	}
 
 	answer = "OK";
 	return (answer);
@@ -24,15 +27,33 @@ const std::string& Brain::begin()
 
 const std::string& Brain::turn(int x, int y)
 {
-	int x2 = x;
-	int y2 = y;
+	goban.add(x, y, them);
+	return (play());
+}
 
-	while (x2 == x && y2 == y) {
-		x2 = rand() % BOARD_SIZE;
-		y2 = rand() % BOARD_SIZE;
+const std::string& Brain::board(int x, int y, int piece)
+{
+
+	play();
+	return (answer);
+}
+
+void Brain::end()
+{
+	goban.start(BOARD_SIZE);
+}
+
+const std::string& Brain::play()
+{
+	int x = 0;
+	int y = 0;
+
+	while (goban.at(x, y) != NONE) {
+		x = rand() % BOARD_SIZE;
+		y = rand() % BOARD_SIZE;
 	}
-	x = x2;
-	y = y2;
+
+	goban.add(x, y, us);
 	return (createAnswer(x, y));
 }
 
