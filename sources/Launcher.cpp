@@ -6,9 +6,9 @@ int Launcher::launch()
 	const std::string& command = protocol.getNextCommand();
 	Command commandType = protocol.whichCommand(command);
 
-	std::cout << command << std::endl;
 	if (commandType == UNKNOWN) {
-		protocol.unknown();
+		std::cout << command << std::endl;
+//		protocol.unknown();
 	}
 	return (brainLaunch(command, commandType));
 }

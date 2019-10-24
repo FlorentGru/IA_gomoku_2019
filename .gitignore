@@ -1,2 +1,4 @@
 ﻿/CppProperties.json
 /.vs
+/build
+/CMakeSettings.json

@@ -22,6 +22,7 @@ const std::string& Brain::begin()
 	int x = 10;
 	int y = 10;
 
+	goban.add(x, y, us);
 	return (createAnswer(x, y));
 }
 
