@@ -27,7 +27,7 @@ const int Board::at(int x, int y)
 	return board[x][y];
 }
 
-bool Board::isNod(int x, int y)
+bool Board::isNode(int x, int y)
 {
 	if (board[x][y] >= 0)
 		return true;
@@ -39,59 +39,88 @@ void Board::set(int x, int y, int value)
 	board[x][y] = value;
 }
 
-void Board::addAxisXNods(int x, int y, vector<Coord>& nods)
+const Coord Board::getHighestValue()
+{
+	int value = -1;
+	int x = 0;
+	Coord res;
+
+	for (const auto& column : board) {
+		int y = 0;
+		for (const auto& node : column) {
+			if (node > value) {
+				value = node;
+				res.x = x;
+				res.y = y;
+			}
+			y++;
+		}
+		x++;
+	}
+	return res;
+}
+
+void Board::getNodesCoord(int x, int y, vector<Coord>& nodes)
+{
+	addAxisXNodes(x, y, nodes);
+	addAxisXNodes(x, y, nodes);
+	addAxisRightDiagNodes(x, y, nodes);
+	addAxisLeftDiagNodes(x, y, nodes);
+}
+
+void Board::addAxisXNodes(int x, int y, vector<Coord>& nodes)
 {
 	for (int i = 1; i <= 5 && x + i < 20; i++) {
-		if (isNod(x + i, y))
-			nods.push_back(Coord(x + i, y));
+		if (isNode(x + i, y))
+			nodes.push_back(Coord(x + i, y));
 	}
 	for (int i = 1; i <= 5 && x - i >= 0; i++) {
-		if (isNod(x - i, y))
-			nods.emplace_back(Coord(x - i, y));
+		if (isNode(x - i, y))
+			nodes.emplace_back(Coord(x - i, y));
 	}
 }
 
-void Board::addAxisYNods(int x, int y, vector<Coord>& nods)
+void Board::addAxisYNodes(int x, int y, vector<Coord>& nodes)
 {
 	for (int i = 1; i <= 5 && y + i < 20; i++) {
-		if (isNod(x, y + i))
-			nods.push_back(Coord(x, y + i));
+		if (isNode(x, y + i))
+			nodes.push_back(Coord(x, y + i));
 	}
 	for (int i = 1; i <= 5 && y - i >= 0; i++) {
-		if (isNod(x, y - i))
-			nods.emplace_back(Coord(x, y - i));
+		if (isNode(x, y - i))
+			nodes.emplace_back(Coord(x, y - i));
 	}
 }
 
-void Board::addAxisRightDiagNods(int x, int y, vector<Coord> & nods)
+void Board::addAxisRightDiagNodes(int x, int y, vector<Coord> & nodes)
 {
 	for (int i = 1; i <= 5 && y + i < 20 && x - i >= 0; i++) {
-		if (isNod(x - i, y + i))
-			nods.push_back(Coord(x - i, y + i));
+		if (isNode(x - i, y + i))
+			nodes.push_back(Coord(x - i, y + i));
 	}
 	for (int i = 1; i <= 5 && x + i < 20 && y - i >= 0; i++) {
-		if (isNod(x + i, y - i))
-			nods.emplace_back(Coord(x + i, y - i));
+		if (isNode(x + i, y - i))
+			nodes.emplace_back(Coord(x + i, y - i));
 	}
 }
 
-void Board::addAxisLeftDiagNods(int x, int y, vector<Coord>& nods)
+void Board::addAxisLeftDiagNodes(int x, int y, vector<Coord>& nodes)
 {
 	for (int i = 1; i <= 5 && y + i < 20 && x + i < 20; i++) {
-		if (isNod(x + i, y + i))
-			nods.push_back(Coord(x + i, y + i));
+		if (isNode(x + i, y + i))
+			nodes.push_back(Coord(x + i, y + i));
 	}
 	for (int i = 1; i <= 5 && x - i >= 0 && y - i >= 0; i++) {
-		if (isNod(x - i, y - i))
-			nods.emplace_back(Coord(x - i, y - i));
+		if (isNode(x - i, y - i))
+			nodes.emplace_back(Coord(x - i, y - i));
 	}
 }
 
-void Board::appendNodLists(vector<Coord>& nods, const vector<Coord>& otherNods)
+void Board::appendNodeLists(vector<Coord>& nodes, const vector<Coord>& otherNodes)
 {
-	for (const auto& value : otherNods) {
-		if (find(nods.cbegin(), nods.cend(), value) == nods.end())
-			nods.push_back(value);
+	for (const auto& node : otherNodes) {
+		if (find(nodes.cbegin(), nodes.cend(), node) == nodes.end())
+			nodes.push_back(node);
 	}
 }
 
@@ -104,8 +133,8 @@ void Board::init()
 
 Coord::Coord()
 {
-	int x = 0;
-	int y = 0;
+	this->x = 0;
+	this->y = 0;
 }
 
 Coord::Coord(int x, int y)

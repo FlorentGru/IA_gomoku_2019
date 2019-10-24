@@ -28,17 +28,21 @@ class Board
 {
 public:
 	int start(int size);
+
 	const array<array<int, BOARD_SIZE>, BOARD_SIZE>& add(int x, int y, PIECE piece);
 	const array<array<int, BOARD_SIZE>, BOARD_SIZE>& get();
-	const int at(int x, int y);
-	bool isNod(int x, int y);
-	void set(int x, int y, int value);
 
-	void addAxisXNods(int x, int y, vector<Coord>& nods);
-	void addAxisYNods(int x, int y, vector<Coord>& nods);
-	void addAxisRightDiagNods(int x, int y, vector<Coord>& nods);
-	void addAxisLeftDiagNods(int x, int y, vector<Coord>& nods);
-	void appendNodLists(vector<Coord>& nods, const vector<Coord>& otherNods);
+	const int at(int x, int y);
+	bool isNode(int x, int y);
+	void set(int x, int y, int value);
+	const Coord getHighestValue();
+
+	void getNodesCoord(int x, int y, vector<Coord>& nods);
+	void addAxisXNodes(int x, int y, vector<Coord>& nods);
+	void addAxisYNodes(int x, int y, vector<Coord>& nods);
+	void addAxisRightDiagNodes(int x, int y, vector<Coord>& nods);
+	void addAxisLeftDiagNodes(int x, int y, vector<Coord>& nods);
+	void appendNodeLists(vector<Coord>& nods, const vector<Coord>& otherNods);
 
 private:
 	void init();

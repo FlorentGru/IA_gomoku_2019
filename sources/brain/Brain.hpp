@@ -16,19 +16,20 @@ public:
 	void end();
 
 private:
-	const std::string& play();
+	const std::string& play(int x, int y);
 
-	void getNodsToEvaluate(int x, int y, vector<Coord> &nods);
+	void getNodesToEvaluate(int x, int y, vector<Coord> &nodes);
+	void evaluateNodes(const vector<Coord>& nodes);
+/*	void evaluateNode(int x, int y);
 
-	void evaluateNode(int x, int y);
 	void checkAxisX(int x, int y);
 	void checkAxisY(int x, int y);
 	void checkAxisRightDiag(int x, int y);
-	void checkAxisLeftDiag(int x, int y);
+	void checkAxisLeftDiag(int x, int y);*/
 
 	const std::string& createAnswer(int x, int y);
 
-	Coord lastPlay;
+	Coord lastMove;
 
 	Board goban;
 	PIECE us;

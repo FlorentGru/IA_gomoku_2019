@@ -9,12 +9,11 @@ Brain::Brain()
 
 const std::string& Brain::start(int size)
 {
-	if (goban.start(size) == 84) {
-		answer = "ERROR unsupported size";
-		return (answer);
-	}
-
 	answer = "OK";
+
+	if (goban.start(size) == 84)
+		answer = "ERROR unsupported size";
+
 	return (answer);
 }
 
@@ -23,66 +22,65 @@ const std::string& Brain::begin()
 	int x = 10;
 	int y = 10;
 
-	goban.add(x, y, us);
+	this->us = BLACK;
+	this->them = WHITE;
+
 	return (createAnswer(x, y));
 }
 
 const std::string& Brain::turn(int x, int y)
 {
 	goban.add(x, y, them);
-	return (play());
+
+	return (play(x, y));
 }
 
 const std::string& Brain::board(int x, int y, int piece)
 {
-
-	play();
-	return (answer);
+	return (play(x, y));
 }
 
 void Brain::end()
 {
-	goban.start(BOARD_SIZE);
 }
 
-const std::string& Brain::play()
+const std::string& Brain::play(int x, int y)
 {
-	int x = 0;
-	int y = 0;
+	vector<Coord> nods;
 
-	while (goban.at(x, y) != INIT) {
-		x = rand() % BOARD_SIZE;
-		y = rand() % BOARD_SIZE;
+	getNodesToEvaluate(x, y, nods);
+	evaluateNodes(nods);
+
+	Coord result = goban.getHighestValue();
+
+	return (createAnswer(result.x, result.y));
+}
+
+void Brain::getNodesToEvaluate(int x, int y, vector<Coord> &nodes)
+{
+	nodes.clear();
+	goban.getNodesCoord(x, y, nodes);
+
+	vector<Coord> otherNodes;
+	goban.getNodesCoord(lastMove.x, lastMove.y, otherNodes);
+
+	goban.appendNodeLists(nodes, otherNodes);
+}
+
+void Brain::evaluateNodes(const vector<Coord>& nodes)
+{
+	for (const auto& node : nodes) {
+		// evaluateNode(node.x, node.y);
 	}
-
-	lastPlay.x = x;
-	lastPlay.y = y;
-	goban.add(x, y, us);
-	return (createAnswer(x, y));
-}
-
-void Brain::getNodsToEvaluate(int x, int y, vector<Coord> &nods)
-{
-	nods.clear();
-
-	goban.addAxisXNods(x, y, nods);
-	goban.addAxisXNods(x, y, nods);
-	goban.addAxisRightDiagNods(x, y, nods);
-	goban.addAxisLeftDiagNods(x, y, nods);
-
-	vector<Coord> otherNods;
-
-	goban.addAxisXNods(x, y, otherNods);
-	goban.addAxisXNods(x, y, otherNods);
-	goban.addAxisRightDiagNods(x, y, otherNods);
-	goban.addAxisLeftDiagNods(x, y, otherNods);
-
-	goban.appendNodLists(nods, otherNods);
 }
 
 const std::string& Brain::createAnswer(int x, int y)
 {
-	answer = std::to_string(x) + ',' + std::to_string(y);
+	lastMove.x = x;
+	lastMove.y = y;
 
+	goban.add(x, y, us);
+
+	answer = std::to_string(x) + ',' + std::to_string(y);
 	return (answer);
 }
