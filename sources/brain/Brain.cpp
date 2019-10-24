@@ -1,4 +1,5 @@
 #include "Brain.hpp"
+#include <algorithm>
 
 Brain::Brain()
 {
@@ -54,8 +55,29 @@ const std::string& Brain::play()
 		y = rand() % BOARD_SIZE;
 	}
 
+	lastPlay.x = x;
+	lastPlay.y = y;
 	goban.add(x, y, us);
 	return (createAnswer(x, y));
+}
+
+void Brain::getNodsToEvaluate(int x, int y, vector<Coord> &nods)
+{
+	nods.clear();
+
+	goban.addAxisXNods(x, y, nods);
+	goban.addAxisXNods(x, y, nods);
+	goban.addAxisRightDiagNods(x, y, nods);
+	goban.addAxisLeftDiagNods(x, y, nods);
+
+	vector<Coord> otherNods;
+
+	goban.addAxisXNods(x, y, otherNods);
+	goban.addAxisXNods(x, y, otherNods);
+	goban.addAxisRightDiagNods(x, y, otherNods);
+	goban.addAxisLeftDiagNods(x, y, otherNods);
+
+	goban.appendNodLists(nods, otherNods);
 }
 
 const std::string& Brain::createAnswer(int x, int y)

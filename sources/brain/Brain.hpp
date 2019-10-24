@@ -1,5 +1,9 @@
+#ifndef _BRAIN_HPP_
+#define _BRAIN_HPP_
+
 #include "Board.hpp"
 #include <string>
+#include <vector>
 
 class Brain {
 public:
@@ -14,6 +18,8 @@ public:
 private:
 	const std::string& play();
 
+	void getNodsToEvaluate(int x, int y, vector<Coord> &nods);
+
 	void evaluateNode(int x, int y);
 	void checkAxisX(int x, int y);
 	void checkAxisY(int x, int y);
@@ -22,9 +28,13 @@ private:
 
 	const std::string& createAnswer(int x, int y);
 
+	Coord lastPlay;
+
 	Board goban;
 	PIECE us;
 	PIECE them;
 
 	std::string answer;
 };
+
+#endif

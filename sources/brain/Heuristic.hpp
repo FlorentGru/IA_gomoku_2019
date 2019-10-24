@@ -1,3 +1,6 @@
+#ifndef _HEURISTIC_HPP_
+#define _HEURISTIC_HPP_
+
 #include <map>
 
 enum Case 
@@ -28,3 +31,5 @@ private:
 		{FOUR_ENEMY, 500}
 	}
 };
+
+#endif // !_HEURISTIC_HPP_
