@@ -25,7 +25,7 @@ public:
     std::string getNextCommand();
     Command whichCommand(const std::string &command);
 	int getStartArg(const std::string& command);
-	const std::pair<int, int> &getTurnArg(const std::string &command);
+	const std::pair<int, int> getTurnArg(const std::string &command);
 	const BoardArg getBoardArg(const std::string& command);
 
 	int unknown();

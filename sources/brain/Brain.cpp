@@ -49,7 +49,7 @@ const std::string& Brain::play()
 	int x = 0;
 	int y = 0;
 
-	while (goban.at(x, y) != NONE) {
+	while (goban.at(x, y) != INIT) {
 		x = rand() % BOARD_SIZE;
 		y = rand() % BOARD_SIZE;
 	}

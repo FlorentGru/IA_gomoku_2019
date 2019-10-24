@@ -41,7 +41,7 @@ int Protocol::getStartArg(const std::string& command)
 	return (size);
 }
 
-const std::pair<int, int>& Protocol::getTurnArg(const std::string& command)
+const std::pair<int, int> Protocol::getTurnArg(const std::string& command)
 {
 	std::vector<std::string> arg = split(command, ' ');
 	std::pair<int, int> turnArg = { -1, -1 };

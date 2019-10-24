@@ -3,22 +3,28 @@
 
 using namespace std;
 
-enum PIECE
-{
-	NONE,
-	BLACK,
-	WHITE,
+struct Coord {
+	int x;
+	int y;
 };
 
-class Board 
+enum PIECE
+{
+	INIT = 0,
+	BLACK = -1,
+	WHITE = -2
+};
+
+class Board
 {
 public:
 	int start(int size);
-	const array<array<PIECE, BOARD_SIZE>, BOARD_SIZE>& add(int x, int y, PIECE piece);
-	const array<array<PIECE, BOARD_SIZE>, BOARD_SIZE>& get();
-	const PIECE at(int x, int y);
+	const array<array<int, BOARD_SIZE>, BOARD_SIZE>& add(int x, int y, PIECE piece);
+	const array<array<int, BOARD_SIZE>, BOARD_SIZE>& get();
+	const int at(int x, int y);
+
 private:
 	void init();
 
-	array<array<PIECE, BOARD_SIZE>, BOARD_SIZE> board;
+	array<array<int, BOARD_SIZE>, BOARD_SIZE> board;
 };

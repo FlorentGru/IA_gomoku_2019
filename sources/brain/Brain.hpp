@@ -14,6 +14,12 @@ public:
 private:
 	const std::string& play();
 
+	void evaluateNode(int x, int y);
+	void checkAxisX(int x, int y);
+	void checkAxisY(int x, int y);
+	void checkAxisRightDiag(int x, int y);
+	void checkAxisLeftDiag(int x, int y);
+
 	const std::string& createAnswer(int x, int y);
 
 	Board goban;

@@ -10,19 +10,19 @@ int Board::start(int size)
 	return (0);
 }
 
-const array<array<PIECE, BOARD_SIZE>, BOARD_SIZE>& Board::add(int x, int y, PIECE piece)
+const array<array<int, BOARD_SIZE>, BOARD_SIZE>& Board::add(int x, int y, PIECE piece)
 {
 	board[x][y] = piece;
 
 	return (board);
 }
 
-const array<array<PIECE, BOARD_SIZE>, BOARD_SIZE>& Board::get()
+const array<array<int, BOARD_SIZE>, BOARD_SIZE>& Board::get()
 {
 	return (board);
 }
 
-const PIECE Board::at(int x, int y)
+const int Board::at(int x, int y)
 {
 	return board[x][y];
 }
@@ -30,6 +30,6 @@ const PIECE Board::at(int x, int y)
 void Board::init()
 {
 	for (auto& column : board) {
-		column.fill(NONE);
+		column.fill(INIT);
 	}
 }
