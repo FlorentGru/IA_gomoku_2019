@@ -8,6 +8,7 @@ enum Command
     BEGIN,
     TURN,
     BOARD,
+	INFO,
     END
 };
 

@@ -6,7 +6,6 @@ std::string Protocol::getNextCommand()
 {
     std::string command;
 
-	std::cout << "waiting for command" << std::endl;
     std::getline(std::cin, command);
 	return (command);
 }
@@ -21,8 +20,10 @@ Command Protocol::whichCommand(const std::string &command)
         return (BEGIN);
     } else if (words.front() == "TURN") {
         return (TURN);
-    } else if (words.front() == "BOARD") {
-        return (BOARD);
+	} else if (words.front() == "BOARD") {
+		return (BOARD);
+	} else if (words.front() == "INFO") {
+		return (INFO);
     } else if (words.front() == "END")
         return (END);
     return (UNKNOWN);
@@ -92,7 +93,6 @@ const std::vector<std::string> Protocol::split(const std::string &string, char d
     std::string buffer;
 
     while (std::getline(strStream, buffer, delimiter)) {
-		std::cout << "step: " << buffer << std::endl;
         words.push_back(buffer);
     }
     return (words);
