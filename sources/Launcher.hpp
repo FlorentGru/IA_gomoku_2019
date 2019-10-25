@@ -1,3 +1,6 @@
+#ifndef _LAUNCHER_HPP_
+#define _LAUNCHER_HPP_
+
 #include "Protocol.hpp"
 #include "brain/Brain.hpp"
 
@@ -11,3 +14,5 @@ private:
 	Protocol protocol;
 	Brain brain;
 };
+
+#endif // !_LAUNCHER_HPP_

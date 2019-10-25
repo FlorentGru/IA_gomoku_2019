@@ -1,3 +1,6 @@
+#ifndef _PROTOCOL_HPP_
+#define _PROTOCOL_HPP_
+
 #include <string>
 #include <vector>
 
@@ -33,3 +36,5 @@ public:
 private:
 	const std::vector<std::string> split(const std::string&, char delimiter);
 };
+
+#endif // !_PROTOCOL_HPP_
