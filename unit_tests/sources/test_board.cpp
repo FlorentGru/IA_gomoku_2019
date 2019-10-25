@@ -2,13 +2,15 @@
 ** EPITECH PROJECT, 2019
 ** AIA_gomoku_2019
 ** File description:
-** test_brain.cpp
+** test_board.cpp
 */
 
 #include <criterion/criterion.h>
-#include "Brain.hpp"
+#include "Board.hpp"
 
-Test(brain_command, no_overflow)
+Test(At, expect_good_return)
 {
+    Board board;
 
+    
 }

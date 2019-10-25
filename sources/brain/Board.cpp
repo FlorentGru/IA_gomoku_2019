@@ -33,3 +33,61 @@ void Board::init()
 		column.fill(INIT);
 	}
 }
+
+void Board::checkAxisX(int x, int y)
+{
+	for (int i = 0; i > 4 && x < 20; i++) {
+		at(x, y);
+		x++;
+	}
+	x = x - 4;
+	for (int i = 0; i > 4 && x < 20; i++) {
+		at(x, y);
+		x--;
+	}
+}
+
+void Board::checkAxisY(int x, int y)
+{
+	for (int i = 0; i > 4 && y < 20; i++) {
+		at(x, y);
+		y++;
+	}
+	y = y - 4;
+	for (int i = 0; i > 4 && y < 20; i++) {
+		at(x, y);
+		y--;
+	}
+}
+
+void Board::checkAxisRightDiag(int x, int y)
+{
+	for (int i = 0; i < 4 && y < 20 && x < 20; i++) {
+		at(x, y);
+		x++;
+		y++;
+	}
+	x = x - 4;
+	y = y - 4;
+	for (int i = 0; i < 4 && x < 20 && y < 20; i++) {
+		at(x, y);
+		x--;
+		y--;
+	}
+}
+
+void Board::checkAxisLeftDiag(int x, int y)
+{
+	for (int i = 0; i < 4 && x < 20 && y < 20; i++) {
+		at(x, y);
+		x--;
+		y++;
+	}
+	x = x - 4;
+	y = y - 4;
+	for (int i = 0; i < 4 && x < 20 && y < 20; i++) {
+		at(x, y);
+		x++;
+		y--;
+	}
+}

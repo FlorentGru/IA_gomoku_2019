@@ -10,15 +10,9 @@ public:
 	const std::string& turn(int x, int y);
 	const std::string& board(int x, int y, int piece);
 	void end();
-
-private:
 	const std::string& play();
 
-	void evaluateNode(int x, int y);
-	void checkAxisX(int x, int y);
-	void checkAxisY(int x, int y);
-	void checkAxisRightDiag(int x, int y);
-	void checkAxisLeftDiag(int x, int y);
+private:
 
 	const std::string& createAnswer(int x, int y);
 

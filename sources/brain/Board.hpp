@@ -25,6 +25,11 @@ public:
 
 private:
 	void init();
+	void checkAxisX(int x, int y);
+	void checkAxisY(int x, int y);
+	void checkAxisRightDiag(int x, int y);
+	void checkAxisLeftDiag(int x, int y);
+
 
 	array<array<int, BOARD_SIZE>, BOARD_SIZE> board;
 };
