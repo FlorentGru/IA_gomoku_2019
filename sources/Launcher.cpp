@@ -7,8 +7,8 @@ int Launcher::launch()
 	Command commandType = protocol.whichCommand(command);
 
 	if (commandType == UNKNOWN) {
-		std::cout << command << std::endl;
-//		protocol.unknown();
+//		std::cout << command << std::endl;
+		protocol.unknown();
 	}
 	return (brainLaunch(command, commandType));
 }
