@@ -17,6 +17,11 @@ struct Coord {
 	bool operator==(const Coord coord) const;
 };
 
+struct Axis {
+    vector<Coord> up;
+    vector<Coord> down;
+};
+
 enum PIECE
 {
 	INIT = 0,
@@ -32,18 +37,23 @@ public:
 	const array<array<int, BOARD_SIZE>, BOARD_SIZE>& add(int x, int y, PIECE piece);
 	const array<array<int, BOARD_SIZE>, BOARD_SIZE>& get();
 
-	const int at(int x, int y);
+	int at(int x, int y);
 	bool isNode(int x, int y);
 	void set(int x, int y, int value);
-	const Coord getHighestValue();
+	Coord getHighestValue();
 
-	void getNodesCoord(int x, int y, vector<Coord>& nods);
-	void addAxisXNodes(int x, int y, vector<Coord>& nods);
-	void addAxisYNodes(int x, int y, vector<Coord>& nods);
-	void addAxisRightDiagNodes(int x, int y, vector<Coord>& nods);
-	void addAxisLeftDiagNodes(int x, int y, vector<Coord>& nods);
-	void appendNodeLists(vector<Coord>& nods, const vector<Coord>& otherNods);
+	void getNodesCoord(int x, int y, vector<Coord>& nodes);
+	void addAxisXNodes(int x, int y, vector<Coord>& nodes);
+	void addAxisYNodes(int x, int y, vector<Coord>& nodes);
+	void addAxisRightDiagNodes(int x, int y, vector<Coord>& nodes);
+	void addAxisLeftDiagNodes(int x, int y, vector<Coord>& nodes);
 
+	void appendNodeLists(vector<Coord>& nods, const vector<Coord>& otherNodes);
+
+    void getAxisX(int x, int y, Axis &nodes);
+    void getAxisY(int x, int y, Axis &nodes);
+    void getAxisRightDiag(int x, int y, Axis &nodes);
+    void getAxisLeftDiag(int x, int y, Axis &nodes);
 private:
 	void init();
 

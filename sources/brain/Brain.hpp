@@ -2,6 +2,7 @@
 #define _BRAIN_HPP_
 
 #include "Board.hpp"
+#include "Heuristic.hpp"
 #include <string>
 #include <vector>
 
@@ -20,17 +21,20 @@ private:
 
 	void getNodesToEvaluate(int x, int y, vector<Coord> &nodes);
 	void evaluateNodes(const vector<Coord>& nodes);
-/*	void evaluateNode(int x, int y);
+	void evaluateNode(int x, int y);
+	Case evaluateAxis(const Axis &axis);
+	int combineEvents(Case axisX, Case axisY, Case axisRightDiag, Case axisLeftDiag);
 
-	void checkAxisX(int x, int y);
-	void checkAxisY(int x, int y);
-	void checkAxisRightDiag(int x, int y);
-	void checkAxisLeftDiag(int x, int y);*/
+	Case checkAxisX(int x, int y);
+	Case checkAxisY(int x, int y);
+	Case checkAxisRightDiag(int x, int y);
+	Case checkAxisLeftDiag(int x, int y);
 
 	const std::string& createAnswer(int x, int y);
 
 	Coord lastMove;
 
+	Heuristic heuristic;
 	Board goban;
 	PIECE us;
 	PIECE them;

@@ -1,10 +1,13 @@
 #include "Brain.hpp"
 #include <algorithm>
+#include <iostream>
 
-Brain::Brain()
+Brain::Brain() : heuristic(goban.get()), goban()
 {
 	this->us = WHITE;
 	this->them = BLACK;
+
+    heuristic.setPlayers(us, them);
 }
 
 const std::string& Brain::start(int size)
@@ -24,8 +27,9 @@ const std::string& Brain::begin()
 
 	this->us = BLACK;
 	this->them = WHITE;
+    heuristic.setPlayers(us, them);
 
-	return (createAnswer(x, y));
+    return (createAnswer(x, y));
 }
 
 const std::string& Brain::turn(int x, int y)
@@ -46,10 +50,10 @@ void Brain::end()
 
 const std::string& Brain::play(int x, int y)
 {
-	vector<Coord> nods;
+	vector<Coord> nodes;
 
-	getNodesToEvaluate(x, y, nods);
-	evaluateNodes(nods);
+	getNodesToEvaluate(x, y, nodes);
+	evaluateNodes(nodes);
 
 	Coord result = goban.getHighestValue();
 
@@ -58,7 +62,6 @@ const std::string& Brain::play(int x, int y)
 
 void Brain::getNodesToEvaluate(int x, int y, vector<Coord> &nodes)
 {
-	nodes.clear();
 	goban.getNodesCoord(x, y, nodes);
 
 	vector<Coord> otherNodes;
@@ -70,8 +73,96 @@ void Brain::getNodesToEvaluate(int x, int y, vector<Coord> &nodes)
 void Brain::evaluateNodes(const vector<Coord>& nodes)
 {
 	for (const auto& node : nodes) {
-		// evaluateNode(node.x, node.y);
+		evaluateNode(node.x, node.y);
 	}
+}
+
+void Brain::evaluateNode(int x, int y)
+{
+    int value = 0;
+
+    const Case axisX = checkAxisX(x, y);
+    const Case axisY = checkAxisY(x, y);
+    const Case axisRightDiag = checkAxisRightDiag(x, y);
+    const Case axisLeftDiag = checkAxisLeftDiag(x, y);
+
+    value = combineEvents(axisX, axisY, axisRightDiag, axisLeftDiag);
+
+    goban.set(x, y, value);
+}
+
+int Brain::combineEvents(Case axisX, Case axisY, Case axisRightDiag, Case axisLeftDiag)
+{
+    int value = 0;
+
+    value += heuristic.getRank(axisX);
+    value += heuristic.getRank(axisY);
+    value += heuristic.getRank(axisRightDiag);
+    value += heuristic.getRank(axisLeftDiag);
+
+    return value;
+}
+
+Case Brain::evaluateAxis(const Axis &axis)
+{
+    Case res;
+
+    res = heuristic.isFour(axis);
+    if (res != NONE) {
+        return res;
+    }
+
+    res = heuristic.isThree(axis);
+    if (res != NONE) {
+        return res;
+    }
+
+    res = heuristic.isOne(axis);
+    return res;
+}
+
+Case Brain::checkAxisX(int x, int y)
+{
+    Case res;
+    Axis axis;
+
+    goban.getAxisX(x, y, axis);
+
+    res = evaluateAxis(axis);
+    return (res);
+}
+
+Case Brain::checkAxisY(int x, int y)
+{
+    Case res;
+    Axis axis;
+
+    goban.getAxisY(x, y, axis);
+
+    res = evaluateAxis(axis);
+    return (res);
+}
+
+Case Brain::checkAxisRightDiag(int x, int y)
+{
+    Case res;
+    Axis axis;
+
+    goban.getAxisRightDiag(x, y, axis);
+
+    res = evaluateAxis(axis);
+    return (res);
+}
+
+Case Brain::checkAxisLeftDiag(int x, int y)
+{
+    Case res;
+    Axis axis;
+
+    goban.getAxisLeftDiag(x, y, axis);
+
+    res = evaluateAxis(axis);
+    return (res);
 }
 
 const std::string& Brain::createAnswer(int x, int y)

@@ -7,7 +7,9 @@
 class Launcher
 {
 public:
-	int launch();
+    Launcher() {}
+
+    int launch();
 private:
 	int brainLaunch(const std::string& command, Command commandType);
 

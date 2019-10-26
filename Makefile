@@ -12,6 +12,7 @@ SRC =	sources/main.cpp		\
 		sources/Protocol.cpp	\
 		sources/brain/Board.cpp	\
 		sources/brain/Brain.cpp	\
+		sources/brain/Heuristic.cpp\
 
 OBJ =	$(SRC:.cpp=.o)
 
