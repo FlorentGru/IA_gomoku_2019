@@ -17,6 +17,8 @@ public:
 	void end();
 
 private:
+
+private:
 	const std::string& play(int x, int y);
 
 	void getNodesToEvaluate(int x, int y, vector<Coord> &nodes);

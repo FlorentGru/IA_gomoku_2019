@@ -30,9 +30,11 @@ $(NAME):	$(OBJ)
 		$(CXX) -o $(NAME) $(OBJ)
 
 clean:
+	make clean -C unit_tests/
 	$(RM) $(OBJ)
 
 fclean:	clean
+	make fclean -C unit_tests/
 	$(RM) $(OBJ) $(NAME)
 
 re:	fclean all

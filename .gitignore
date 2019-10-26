@@ -2,3 +2,8 @@
 /.vs
 /build
 /CMakeSettings.json
+settings.json
+sources/brain/Board.gcda
+sources/brain/Board.gcno
+sources/brain/Brain.gcda
+sources/brain/Brain.gcno
