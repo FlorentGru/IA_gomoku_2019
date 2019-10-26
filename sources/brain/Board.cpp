@@ -11,7 +11,7 @@ int Board::start(int size)
 	return (0);
 }
 
-const array<array<int, BOARD_SIZE>, BOARD_SIZE>& Board::add(int x, int y, PIECE piece)
+const array<array<int, BOARD_SIZE>, BOARD_SIZE>& Board::add(int x, int y, int piece)
 {
 	board[x][y] = piece;
 
@@ -63,6 +63,10 @@ Coord Board::getHighestValue()
 
 void Board::getNodesCoord(int x, int y, vector<Coord>& nodes)
 {
+    if (x < 0 || y < 0) {
+        return;
+    }
+
 	addAxisXNodes(x, y, nodes);
 	addAxisYNodes(x, y, nodes);
 	addAxisRightDiagNodes(x, y, nodes);
@@ -231,8 +235,8 @@ void Board::checkAxisLeftDiag(int x, int y)
 }
 Coord::Coord()
 {
-	this->x = 0;
-	this->y = 0;
+	this->x = -1;
+	this->y = -1;
 }
 
 Coord::Coord(int x, int y)

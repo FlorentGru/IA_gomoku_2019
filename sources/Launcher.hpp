@@ -12,6 +12,7 @@ public:
     int launch();
 private:
 	int brainLaunch(const std::string& command, Command commandType);
+    int launchBoard();
 
 	Protocol protocol;
 	Brain brain;

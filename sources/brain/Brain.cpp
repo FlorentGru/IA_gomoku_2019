@@ -39,9 +39,42 @@ const std::string& Brain::turn(int x, int y)
 	return (play(x, y));
 }
 
-const std::string& Brain::board(int x, int y, int piece)
+int Brain::board(int x, int y, int piece)
 {
-	return (play(x, y));
+    PIECE it;
+
+    if (piece == 1) {
+        it = this->us;
+    } else {
+        it = this->them;
+    }
+
+    goban.add(x, y, it);
+    boardNodes.emplace_back(Coord(x, y));
+
+	return (0);
+}
+
+const std::string& Brain::boardPlay()
+{
+    vector<Coord> nodes;
+
+    for (const auto &coord : boardNodes) {
+        addNodesToEvaluate(coord.x, coord.y, nodes);
+    }
+    evaluateNodes(nodes);
+
+    Coord result = goban.getHighestValue();
+
+    return (createAnswer(result.x, result.y));
+}
+
+void Brain::addNodesToEvaluate(int x, int y, vector<Coord> &nodes)
+{
+    vector<Coord> newNodes;
+    goban.getNodesCoord(x, y, newNodes);
+
+    goban.appendNodeLists(nodes, newNodes);
 }
 
 void Brain::end()

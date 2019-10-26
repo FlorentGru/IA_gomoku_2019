@@ -9,6 +9,7 @@ int Launcher::launch()
 	if (commandType == UNKNOWN) {
 //		std::cout << command << std::endl;
 		protocol.unknown();
+		return (0);
 	}
 	return (brainLaunch(command, commandType));
 }
@@ -33,8 +34,7 @@ int Launcher::brainLaunch(const std::string& command, Command commandType)
 		protocol.answer(brain.turn(coord.first, coord.second));
 		break;
 	case BOARD:
-		arg = protocol.getBoardArg(command);
-		protocol.answer(brain.board(arg.x, arg.y, arg.player));
+		launchBoard();
 		break;
 	case END:
 		brain.end();
@@ -42,4 +42,18 @@ int Launcher::brainLaunch(const std::string& command, Command commandType)
 	}
 
 	return 0;
+}
+
+int Launcher::launchBoard()
+{
+    std::string command = protocol.getNextCommand();
+
+    brain.start(BOARD_SIZE);
+    while (command != "DONE") {
+        BoardArg args = protocol.getBoardArg(command);
+        brain.board(args.x, args.y, args.player);
+        command = protocol.getNextCommand();
+    }
+    protocol.answer(brain.boardPlay());
+    return (0);
 }

@@ -34,7 +34,7 @@ class Board
 public:
 	int start(int size);
 
-	const array<array<int, BOARD_SIZE>, BOARD_SIZE>& add(int x, int y, PIECE piece);
+	const array<array<int, BOARD_SIZE>, BOARD_SIZE>& add(int x, int y, int piece);
 	const array<array<int, BOARD_SIZE>, BOARD_SIZE>& get();
 
 	int at(int x, int y);
