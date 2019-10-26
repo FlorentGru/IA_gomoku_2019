@@ -7,3 +7,5 @@ sources/brain/Board.gcda
 sources/brain/Board.gcno
 sources/brain/Brain.gcda
 sources/brain/Brain.gcno
+sources/brain/Heuristic.gcno
+sources/brain/Heuristic.gcda

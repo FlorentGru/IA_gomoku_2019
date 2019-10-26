@@ -11,10 +11,13 @@ SRC		=	$(SRC_DIR)/brain/Brain.cpp	\
 			$(SRC_DIR)/brain/Board.cpp	\
 			$(SRC_DIR)/Launcher.cpp		\
 			$(SRC_DIR)/Protocol.cpp		\
+			$(SRC_DIR)/brain/Heuristic.cpp	\
 
 SRC_UT_DIR	=	./sources
 
-SRC_UT		= 	$(SRC_UT_DIR)/test_brain.cpp
+SRC_UT		= 	$(SRC_UT_DIR)/test_brain.cpp	\
+				$(SRC_UT_DIR)/test_board.cpp	\
+				$(SRC_UT_DIR)/test_protocol.cpp
 
 INC	=	-I ../sources/ -I ../sources/brain/
 

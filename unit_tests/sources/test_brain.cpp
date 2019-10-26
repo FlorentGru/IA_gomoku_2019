@@ -31,10 +31,3 @@ Test(start_command, expect_print_wrong_type_for_zero)
 
     cr_expect_str_eq(answer.c_str(), "ERROR unsupported size");
 }
-
-Test(turn_command, expect_good_return)
-{
-    Brain brain;
-    
-    cr_expect_eq(brain.play(), brain.play());
-}
