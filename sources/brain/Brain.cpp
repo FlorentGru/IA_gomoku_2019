@@ -128,6 +128,8 @@ int Brain::combineEvents(Case axisX, Case axisY, Case axisRightDiag, Case axisLe
 {
     int value = 0;
 
+    value += winCondition(axisX, axisY, axisRightDiag, axisLeftDiag);
+
     value += heuristic.getRank(axisX);
     value += heuristic.getRank(axisY);
     value += heuristic.getRank(axisRightDiag);
@@ -138,7 +140,7 @@ int Brain::combineEvents(Case axisX, Case axisY, Case axisRightDiag, Case axisLe
 
 Case Brain::evaluateAxis(const Axis &axis)
 {
-    Case res;
+    Case res = NONE;
 
     res = heuristic.isFour(axis);
     if (res != NONE) {
@@ -146,6 +148,11 @@ Case Brain::evaluateAxis(const Axis &axis)
     }
 
     res = heuristic.isThree(axis);
+    if (res != NONE) {
+        return res;
+    }
+
+    res = heuristic.isTwo(axis);
     if (res != NONE) {
         return res;
     }
@@ -207,4 +214,20 @@ const std::string& Brain::createAnswer(int x, int y)
 
 	answer = std::to_string(x) + ',' + std::to_string(y);
 	return (answer);
+}
+
+int Brain::winCondition(Case axisX, Case axisY, Case axisRightDiag, Case axisLeftDiag)
+{
+    int count = 0;
+    if (axisX == TWO_FRIENDLY)
+        count++;
+    if (axisY == TWO_FRIENDLY)
+        count++;
+    if (axisRightDiag == TWO_FRIENDLY)
+        count++;
+    if (axisLeftDiag == TWO_FRIENDLY)
+        count++;
+    if (count >= 2)
+        return 40;
+    return 0;
 }

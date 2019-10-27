@@ -28,7 +28,9 @@ private:
 	void evaluateNodes(const vector<Coord>& nodes);
 	void evaluateNode(int x, int y);
 	Case evaluateAxis(const Axis &axis);
+
 	int combineEvents(Case axisX, Case axisY, Case axisRightDiag, Case axisLeftDiag);
+	int winCondition(Case axisX, Case axisY, Case axisRightDiag, Case axisLeftDiag);
 
 	Case checkAxisX(int x, int y);
 	Case checkAxisY(int x, int y);

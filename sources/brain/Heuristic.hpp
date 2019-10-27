@@ -43,6 +43,11 @@ public:
     Case threeFriendlyAlgo(const vector<Coord> &up, const vector<Coord> &down);
     Case threeEnemyAlgo(const vector<Coord> &up, const vector<Coord> &down);
 
+    Case isTwo(const Axis &axis);
+    Case isTwoFriendly(const Axis &axis);
+    Case isTwoEnemy(const Axis &axis);
+    Case twoAlgo(const vector<Coord> &up, const vector<Coord> &down, bool friendly);
+
     Case isOne(const Axis &axis);
     Case isOneFriendly(const Axis &axis);
     Case isOneEnemy(const Axis &axis);
@@ -58,18 +63,18 @@ private:
     PIECE _them;
 
     bool mode;
-    void setAttackMode();
-    void setDefenceMode();
+    void setMode(bool mode);
 
-    std::map<Case, int> ranks = { {NONE, 0},
-		{ONE_FRIENDLY, 5},		{ONE_FRIENDLY_BLOCKED, 2},
-		{ONE_ENEMY, 6},			{ONE_ENEMY_BLOCKED, 3},
-		{TWO_FRIENDLY, 10},		{TWO_FRIENDLY_BLOCKED, 5},
-		{TWO_ENEMY, 15},		    {TWO_ENEMY_BLOCKED, 6},
-		{THREE_FRIENDLY, 100},	{THREE_FRIENDLY_BLOCKED, 10},
-		{THREE_ENEMY, 50},		{THREE_ENEMY_BLOCKED, 15},
+    std::map<Case, int> ranks = {
+        {NONE, 0},
+		{ONE_FRIENDLY,  5},     {ONE_FRIENDLY_BLOCKED,  2},
+		{ONE_ENEMY,     6},     {ONE_ENEMY_BLOCKED,     3},
+		{TWO_FRIENDLY,  0},     {TWO_FRIENDLY_BLOCKED,  5},
+		{TWO_ENEMY,     15},    {TWO_ENEMY_BLOCKED,     6},
+		{THREE_FRIENDLY,100},   {THREE_FRIENDLY_BLOCKED,0},
+		{THREE_ENEMY,   50},    {THREE_ENEMY_BLOCKED,   15},
 		{FOUR_FRIENDLY, 1000},
-		{FOUR_ENEMY, 500}
+		{FOUR_ENEMY,    500}
 	};
 
 };
